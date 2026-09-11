@@ -746,6 +746,13 @@ export default {
       this.isTouched = true;
     },
     touchEnd(e) {
+      if (this.isInModal) {
+        e.preventDefault();
+        this.$emit("clicked", this.glyph.id);
+        this.suppressTooltip = false;
+        this.isTouched = false;
+        return;
+      }
       if (this.isCurrentTooltip) {
         e.preventDefault();
         this.hideTooltip();
